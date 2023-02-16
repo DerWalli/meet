@@ -1,6 +1,6 @@
 import { mockData } from "./mock-data";
-import axios from "axios";
-import { NProgress } from "nprogress";
+//import axios from "axios";
+import NProgress from "nprogress";
 
 export const extractLocations = (events) => {
     var extractLocations = events.map((event) => event.location);
@@ -25,14 +25,12 @@ export const extractLocations = (events) => {
       NProgress.done();
       return mockData;
     }
-  
-  
     const token = await getAccessToken();
   
     if (token) {
       removeQuery();
       const url = 'https://7b49lfjnpd.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
-      const result = await axios.get(url);
+      const result = await /*axios.get*/fetch(url);
       if (result.data) {
         var locations = extractLocations(result.data.events);
         localStorage.setItem("lastEvents", JSON.stringify(result.data));
@@ -52,16 +50,15 @@ export const getAccessToken = async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
     if (!code) {
-      const results = await axios.get(
+      const results = await /*axios.get*/fetch(
         "https://7b49lfjnpd.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
-      );
-      const { authUrl } = results.data;
-      return (window.location.href = authUrl);
-    }
+        );
+        const {authUrl}  = results.data;
+        return (window.location.href = authUrl);
+      }
     return code && getToken(code);
   }
   return accessToken;
-
   };
 
   const removeQuery = () => {
@@ -79,6 +76,22 @@ export const getAccessToken = async () => {
   };
 
   const getToken = async (code) => {
+    try {
+        const encodeCode = encodeURIComponent(code);
+  
+        const response = await fetch( 'https://7b49lfjnpd.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const { access_token } = await response.json();
+        access_token && localStorage.setItem("access_token", access_token);
+        return access_token;
+    } catch(error) {
+        error.json();
+    }
+  }
+
+  /* const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
       'https://7b49lfjnpd.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
@@ -91,4 +104,4 @@ export const getAccessToken = async () => {
     access_token && localStorage.setItem("access_token", access_token);
   
     return access_token;
-  };
+  }; */
