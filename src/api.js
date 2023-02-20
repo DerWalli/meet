@@ -70,8 +70,8 @@ export const getAccessToken = async () => {
       const results = await /*axios.get*/fetch(
         "https://7b49lfjnpd.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
         );
-        const authUrl = results.authUrl;
-        console.log('authUrl', authUrl);
+        const {authUrl} = results.data;
+        console.log('1', authUrl);
         return (window.location.href = authUrl);
       }
     return code && getToken(code);
