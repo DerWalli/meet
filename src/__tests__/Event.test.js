@@ -17,7 +17,7 @@ describe('<Event /> component', () => {
       const location = EventWrapper.find('p.location');
       const locationString = event.location;
 
-      expect(EventWrapper.find('.Event')).toHaveLength(1);
+      expect(EventWrapper.find('.event')).toHaveLength(1);
 
       expect(EventWrapper.find('.summary')).toHaveLength(1);
       expect(summary.text()).toBe(summaryString);

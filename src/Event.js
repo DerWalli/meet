@@ -13,7 +13,7 @@ class Event extends Component {
     const { collapsed } = this.state;
 
     return (
-    <div className="Event">
+    <div className="event">
       <h2 className="summary">{ event.summary }</h2>
       <p className="location">{`Location: ${event.location}`}</p>
       <button 
