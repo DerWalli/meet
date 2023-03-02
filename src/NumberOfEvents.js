@@ -28,7 +28,18 @@ class NumberOfEvents extends Component {
         const { eventCount } = this.state;
         return (
           <div className="NumberOfEvents">
-            <ErrorAlert text={this.state.errorText} />
+            <label>
+          Select how many events to show:
+          <input
+            className="select-number"
+            type="number"
+            value={this.state.number}
+            onChange={this.optionChanged}
+            min="1"
+          />
+        </label>
+        <ErrorAlert text={this.state.errorText} />
+            {/* <ErrorAlert text={this.state.errorText} />
             <select 
             className="select-number"
             value={this.state.eventCount}
@@ -49,9 +60,10 @@ class NumberOfEvents extends Component {
               value={96}
               >96</option>
             </select>
-
+ */}
           </div>
         );
+      
       }
 }
 

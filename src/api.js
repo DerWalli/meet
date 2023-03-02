@@ -52,9 +52,9 @@ export const extractLocations = (events) => {
       return mockData;
     }
     if (!navigator.onLine) {
-      const data = localStorage.getItem("lastEvents");
+      const lastEvents = localStorage.getItem("lastEvents");
       NProgress.done();
-      return data?JSON.parse(events).events:[];;
+      return lastEvents ? JSON.parse(lastEvents).events : [];
     }
     const token = await getAccessToken();
   
