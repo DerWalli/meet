@@ -12,7 +12,7 @@ class App extends Component {
     events: [],
     locations: [],
     seletedLocation: 'all',
-    numberOfEvents: 32
+    numberOfEvents: 16
   }
 
   updateEvents = (location) => {
@@ -21,7 +21,8 @@ class App extends Component {
         events :
         events.filter((event) => event.location === location);
       this.setState({
-        events: locationEvents
+        events: locationEvents,
+        selectedLocation: location,
       });
     });
   }

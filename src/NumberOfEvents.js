@@ -7,7 +7,7 @@ class NumberOfEvents extends Component {
       errorText: ''
      }
 
-    optionChanged = (event, props) => {
+    /* optionChanged = (event, props) => {
       const inputValue = event.target.value;
       if(inputValue < 0 || inputValue > 32 ) {
         this.setState({
@@ -20,7 +20,22 @@ class NumberOfEvents extends Component {
           errorText: ''
         })
       }
-      }
+      } */
+      optionChanged = (event, props) => {
+        const inputValue = event.target.value;
+        if (inputValue > 32 || inputValue < 0)
+          this.setState({
+            number: inputValue,
+            errorText: "only values from 1 - 32 can be specified.",
+          });
+        else {
+        this.setState({
+          eventCount: inputValue,
+          errorText: ''
+          });
+        }
+        this.props.updateEvents(undefined, inputValue);
+      };
       //this.setState({eventCount: event.target.value});
     //}
 
