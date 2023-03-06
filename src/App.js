@@ -50,7 +50,7 @@ class App extends Component {
   render() {
 
     const warningMessage = navigator.onLine
-      ? "Online"
+      ? ""
       : "App is running in Offline-Mode";
 
     return (
