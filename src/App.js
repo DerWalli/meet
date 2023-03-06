@@ -50,12 +50,12 @@ class App extends Component {
   render() {
 
     const warningMessage = navigator.onLine
-      ? ""
+      ? "Online"
       : "App is running in Offline-Mode";
 
     return (
       <div className="App">
-        <WarningAlert message={warningMessage} />
+        <WarningAlert text={warningMessage} />
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
